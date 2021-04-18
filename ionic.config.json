@@ -1,0 +1,7 @@
+{
+  "name": "GoldJeweleryPriceCalculator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
