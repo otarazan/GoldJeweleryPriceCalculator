@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class Tab2Page {
               "92.5": "Sterling silver",
               "80":"Jewellery silver"};
   spread:number=5;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private dataService:DataService) {
     
     this.http.get('https://www.xe.com/api/popular-pairs/?from=EUR').subscribe((currencies:any) => {
       this.currencies = currencies;
@@ -44,6 +45,7 @@ export class Tab2Page {
   calculate(){
     let spreadp = (this.spread/100)+1;
     this.calculation = (this.price*this.weightGr*28.4*this.purity/100*(spreadp)).toFixed(2);
+    this.dataService.setSilver(this.weightGr);
   }
 
   modelChange(){
