@@ -4,11 +4,11 @@ import { DataService } from '../services/data.service';
 
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss']
 })
-export class Tab2Page {
+export class Tab4Page {
 
   
   gr2OzRatio:any=0.0352739619;
@@ -20,25 +20,24 @@ export class Tab2Page {
   calculation:string;
   weightGr:number=this.oz2GrRatio;
   weightOz=1;
-  purity:any="99.9";
-  purities = {"99.9": "Pure silver",
-              '95.8': "Brittania",
-              "92.5": "Sterling silver",
-              "80":"Jewellery silver"};
+  purity:any="95";
+  purities = {"95": "95% Platinum",
+              '85': "85% Platinum",
+              "80": "80% Platinum",
+              "75": "75% Platinum"};
   spread:number=5;
   constructor(private http: HttpClient, private dataService:DataService) {
     
-    this.dataService.getCurrencies().subscribe((currencies:any) => {
-      this.currencies = currencies;
-      this.currencyChange();
-    });
+    this.currencies = ["CAD","USD"];
+    this.currencyChange();
 
   }
 
   currencyChange(){
     this.dataService.setCurrency(this.currency);
-    this.dataService.getPrice().subscribe((response:any) => {
-      this.price = response.items[0].xagPrice;
+    this.dataService.getPlatinumPrice().subscribe((response:any) => {
+      
+      this.price = response['platinumAsk'+this.currency].replace(/[^0-9.-]+/g,"");
       this.calculate();
     });
   }
@@ -46,7 +45,8 @@ export class Tab2Page {
   calculate(){
     let spreadp = (this.spread/100)+1;
     this.calculation = (this.price*this.weightGr*this.gr2OzRatio*this.purity/100*(spreadp)).toFixed(2);
-    this.dataService.setSilver(this.weightOz);
+    this.dataService.setPlatinum(this.weightOz);
+    console.log(this.calculation);
   }
 
   modelChange(){
@@ -68,4 +68,5 @@ export class Tab2Page {
   ionViewDidEnter() {    
     this.currency = this.dataService.getCurrency();
   }
+
 }

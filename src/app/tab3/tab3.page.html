@@ -14,13 +14,18 @@
   </ion-header>
 
   <ion-item  >
-    <ion-label >Gold</ion-label>
-    <ion-input  [(ngModel)]="goldCount" (ionChange)="modelChange()"></ion-input>
+    <ion-label >Gold (oz) X {{goldPrice}}</ion-label>
+    <ion-input  slot="end" [(ngModel)]="goldCount" (ionChange)="modelChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label >Silver</ion-label>
-    <ion-input  [(ngModel)]="silverCount" (ionChange)="modelChange()"></ion-input>
+    <ion-label >Silver (oz) X {{silverPrice}}</ion-label>
+    <ion-input slot="end"  [(ngModel)]="silverCount" (ionChange)="modelChange()"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Platinum (oz) X {{platinumPrice}}</ion-label>
+    <ion-input slot="end" [(ngModel)]="platinumCount" (ionChange)="modelChange()"></ion-input>
   </ion-item>
 
   <ion-card>

@@ -10,13 +10,13 @@ import { DataService } from '../services/data.service';
 export class Tab1Page {
 
   gr2OzRatio:any=0.0352739619;
-  oz2GrRatio:any=28.4;
+  oz2GrRatio:any=28.3495231;
 
   currencies:any;
   price:number;
   currency:string="CAD";
   calculation:string;
-  weightGr:number=this.gr2OzRatio;
+  weightGr:number=this.oz2GrRatio;
   weightOz=1;
   purity:any="99.9";
   purities = {"99.9": "24 Karat",
@@ -26,6 +26,7 @@ export class Tab1Page {
               "41.67":"10 Karat",
               "33.33":"8 Karat"};
   spread:number=5;
+
   constructor(private http: HttpClient, private dataService: DataService) {
     this.dataService.getCurrencies().subscribe((currencies:any) => {
       this.currencies = currencies;
@@ -45,7 +46,7 @@ export class Tab1Page {
 
   calculate(){
     let spreadp = (this.spread/100)+1;
-    this.calculation = (this.price*this.weightGr*28.4*this.purity/100*(spreadp)).toFixed(2);
+    this.calculation = (this.price*this.weightGr*this.gr2OzRatio*this.purity/100*(spreadp)).toFixed(2);
     this.dataService.setGold(this.weightOz);
   }
 
@@ -55,13 +56,17 @@ export class Tab1Page {
 
   onChangeOz(value){
     console.log(value);
-    this.weightGr = value*this.gr2OzRatio;
+    this.weightGr = value*this.oz2GrRatio;
     this.modelChange();
   }
 
   onChangeGr(value){
     console.log(value);
-    this.weightOz = value*this.oz2GrRatio;
+    this.weightOz = value*this.gr2OzRatio;
     this.modelChange();
+  }
+
+  ionViewDidEnter() {    
+    this.currency = this.dataService.getCurrency();
   }
 }

@@ -8,10 +8,14 @@ export class DataService {
 
   constructor(private http: HttpClient) { 
     this.currency="CAD";
+    this.silverCount=1;
+    this.goldCount=1;
+    this.platinumCount=1;
   }
 
   goldCount: number;
   silverCount:number;
+  platinumCount:number;
   currency:any;
 
   setCurrency(currency){
@@ -30,12 +34,25 @@ export class DataService {
     return this.http.get('https://data-asg.goldprice.org/dbXRates/'+this.currency)
   }
 
+  getPlatinumPrice(){
+    return this.http.get('https://goldstocklive.com/getheaderfeed.php')
+  }
+
   setGold(goldCount) {
       this.goldCount = goldCount;
   }
 
   getGold(){
       return this.goldCount;
+  }
+
+  getPlatinum(){
+    return this.platinumCount;
+  }
+
+
+  setPlatinum(platinumCount){
+    this.platinumCount = platinumCount;
   }
 
   setSilver(silverCount) {
