@@ -13,13 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-item>
-    <ion-label position="floating">Gold</ion-label>
+  <ion-item  >
+    <ion-label >Gold</ion-label>
     <ion-input  [(ngModel)]="goldCount" (ionChange)="modelChange()"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Silver</ion-label>
+    <ion-label >Silver</ion-label>
     <ion-input  [(ngModel)]="silverCount" (ionChange)="modelChange()"></ion-input>
   </ion-item>
 
@@ -28,12 +28,14 @@
       <ion-icon name="cash-outline" slot="start"></ion-icon>
       <ion-label>Total</ion-label>
     </ion-item>
-  
-    <ion-card-content>
-      This is content, without any paragraph or header tags,
-      within an ion-card-content element.
-      {{data}}
-    </ion-card-content>
+    <ion-card-header class="ion-float-right">
+      <ion-card-subtitle>
+        <ion-badge color="success">{{currency}}</ion-badge>
+      </ion-card-subtitle>
+      <ion-card-title size="large">
+        {{total}}
+      </ion-card-title>
+    </ion-card-header>
   </ion-card>
 
 </ion-content>

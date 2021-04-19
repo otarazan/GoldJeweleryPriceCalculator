@@ -27,7 +27,7 @@ export class Tab1Page {
               "33.33":"8 Karat"};
   spread:number=5;
   constructor(private http: HttpClient, private dataService: DataService) {
-    this.http.get('https://www.xe.com/api/popular-pairs/?from=EUR').subscribe((currencies:any) => {
+    this.dataService.getCurrencies().subscribe((currencies:any) => {
       this.currencies = currencies;
       this.currencyChange();
     });
@@ -35,7 +35,8 @@ export class Tab1Page {
   }
 
   currencyChange(){
-    this.http.get('https://data-asg.goldprice.org/dbXRates/'+this.currency).subscribe((response:any) => {
+    this.dataService.setCurrency(this.currency);
+    this.dataService.getPrice().subscribe((response:any) => {
       console.log(response);
       this.price = response.items[0].xauClose;
       this.calculate();
@@ -45,8 +46,7 @@ export class Tab1Page {
   calculate(){
     let spreadp = (this.spread/100)+1;
     this.calculation = (this.price*this.weightGr*28.4*this.purity/100*(spreadp)).toFixed(2);
-    
-    this.dataService.setGold(this.weightGr);
+    this.dataService.setGold(this.weightOz);
   }
 
   modelChange(){
