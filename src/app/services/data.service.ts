@@ -1,5 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import '@capacitor-community/http';
+import { isPlatform } from '@ionic/core';
+import '@capacitor-community/http';
+
+import { Plugins } from '@capacitor/core';
+
+import {from} from 'rxjs'
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +26,22 @@ export class DataService {
   platinumCount:number;
   currency:any;
 
+  get(url){
+    if(isPlatform('capacitor')){
+      const { Http } = Plugins;
+
+      return from( Http.request({
+        method: 'GET',
+        url:url
+      })).pipe(
+        map((result:any)=>result.data)
+      );
+    }else{
+      return this.http.get(url);
+    }
+  }
+
+
   setCurrency(currency){
     this.currency=currency;
   }
@@ -27,15 +51,15 @@ export class DataService {
   }
 
   getCurrencies(){
-    return this.http.get('https://www.xe.com/api/popular-pairs/?from=JPY');
+    return this.get('https://www.xe.com/api/popular-pairs/?from=JPY');
   }
 
   getPrice(){
-    return this.http.get('https://data-asg.goldprice.org/dbXRates/'+this.currency)
+    return this.get('https://data-asg.goldprice.org/dbXRates/'+this.currency)
   }
 
   getPlatinumPrice(){
-    return this.http.get('https://goldstocklive.com/getheaderfeed.php')
+    return this.get('https://goldstocklive.com/getheaderfeed.php')
   }
 
   setGold(goldCount) {
