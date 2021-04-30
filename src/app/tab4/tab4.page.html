@@ -32,7 +32,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-label position="stacked">Select silver purity</ion-label>
+        <ion-label position="stacked">Select Platinum purity</ion-label>
         <ion-select placeholder="Select One" [(ngModel)]="purity" (ionChange)="modelChange()">
           <ion-select-option *ngFor="let p of purities | keyvalue" value="{{p.key}}">{{p.value}}</ion-select-option>
         </ion-select>
@@ -42,7 +42,7 @@
     <ion-row>
       <ion-col size="8">
         <ion-item>
-          <ion-label position="floating">Current Silver Price</ion-label>
+          <ion-label position="floating">Current Platinum Price</ion-label>
           <ion-input  [(ngModel)]="price" (ionChange)="modelChange()"></ion-input>
         </ion-item>
       </ion-col>

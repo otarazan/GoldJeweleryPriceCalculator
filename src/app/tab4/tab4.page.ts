@@ -21,7 +21,7 @@ export class Tab4Page {
   weightGr:number=this.oz2GrRatio;
   weightOz=1;
   purity:any="95";
-  purities = {"95": "95% Platinum",
+  purities = {"95": "95% DD",
               '85': "85% Platinum",
               "80": "80% Platinum",
               "75": "75% Platinum"};
@@ -38,6 +38,7 @@ export class Tab4Page {
     this.dataService.getPlatinumPrice().subscribe((response:any) => {
       
       this.price = response['platinumAsk'+this.currency].replace(/[^0-9.-]+/g,"");
+      console.log(this.price);
       this.calculate();
     });
   }
