@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "GoldJeweleryPriceCalculator",
+  "appId": "io.ionic.preciousmetaldiversifier",
+  "appName": "PreciousMetalDiversifier",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
