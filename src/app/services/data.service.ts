@@ -25,6 +25,7 @@ export class DataService {
   silverCount:number;
   platinumCount:number;
   currency:any;
+  currencies:any = ["USD","EUR","MYR","GBP","HKD","SGD","AUD","TWD","INR","CAD"];
 
   get(url){
     if(isPlatform('capacitor')){
@@ -51,7 +52,7 @@ export class DataService {
   }
 
   getCurrencies(){
-    return this.get('https://www.xe.com/api/popular-pairs/?from=JPY');
+    return this.currencies;
   }
 
   getPrice(){

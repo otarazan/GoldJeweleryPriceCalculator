@@ -34,7 +34,7 @@
       <ion-col size="12">
         <ion-label position="stacked">Select gold purity</ion-label>
         <ion-select placeholder="Select One" [(ngModel)]="purity" (ionChange)="modelChange()">
-          <ion-select-option *ngFor="let p of purities | keyvalue" value="{{p.key}}">{{p.value}}</ion-select-option>
+          <ion-select-option *ngFor="let p of purities | keyvalue" [value]="p.key">{{p.value}}</ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -50,7 +50,7 @@
         <ion-item>
           <ion-label position="floating">Currency</ion-label>
           <ion-select placeholder="Select One" [(ngModel)]="currency" (ionChange)="currencyChange()">
-            <ion-select-option *ngFor="let currency of currencies" value="{{currency}}">{{currency}}</ion-select-option>
+            <ion-select-option *ngFor="let currency of currencies" [value]="currency">{{currency}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

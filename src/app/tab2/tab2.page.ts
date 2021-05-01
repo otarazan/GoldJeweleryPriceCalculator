@@ -27,11 +27,9 @@ export class Tab2Page {
               "80":"Jewellery silver"};
   spread:number=5;
   constructor(private http: HttpClient, private dataService:DataService) {
-    
-    this.dataService.getCurrencies().subscribe((currencies:any) => {
-      this.currencies = currencies;
-      this.currencyChange();
-    });
+    this.currency = this.dataService.getCurrency();    
+    this.currencies =  this.dataService.getCurrencies();
+    this.currencyChange();
 
   }
 
@@ -65,7 +63,4 @@ export class Tab2Page {
     this.modelChange();
   }
 
-  ionViewDidEnter() {    
-    this.currency = this.dataService.getCurrency();
-  }
 }

@@ -16,7 +16,7 @@ export class Tab1Page {
   price:number;
   currency:string="CAD";
   calculation:string;
-  weightGr:number=this.oz2GrRatio;
+  weightGr:number = this.oz2GrRatio;
   weightOz=1;
   purity:any="99.9";
   purities = {"99.9": "24 Karat",
@@ -28,17 +28,14 @@ export class Tab1Page {
   spread:number=5;
 
   constructor(private http: HttpClient, private dataService: DataService) {
-    this.dataService.getCurrencies().subscribe((currencies:any) => {
-      this.currencies = currencies;
-      this.currencyChange();
-    });
 
+    this.currencies =  this.dataService.getCurrencies();
+    this.currencyChange();
   }
 
   currencyChange(){
     this.dataService.setCurrency(this.currency);
     this.dataService.getPrice().subscribe((response:any) => {
-      console.log(response);
       this.price = response.items[0].xauClose;
       this.calculate();
     });
@@ -55,18 +52,12 @@ export class Tab1Page {
   }
 
   onChangeOz(value){
-    console.log(value);
     this.weightGr = value*this.oz2GrRatio;
     this.modelChange();
   }
 
   onChangeGr(value){
-    console.log(value);
     this.weightOz = value*this.gr2OzRatio;
     this.modelChange();
-  }
-
-  ionViewDidEnter() {    
-    this.currency = this.dataService.getCurrency();
   }
 }
